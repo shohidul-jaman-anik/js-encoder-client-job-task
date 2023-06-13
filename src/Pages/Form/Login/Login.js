@@ -1,14 +1,39 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import loginImg from '../../../Asset/form-illustrator/Sign in-pana.svg';
 import './Login.css';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const onSubmit = (data) => {
+    const navigate = useNavigate()
 
+    const onSubmit = (data) => {
+        fetch(`http://localhost:5000/login`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    localStorage.setItem("token",result.token)
+                    console.log("result", result)
+                    navigate("/")
+                } else {
+                    toast.error(result.message)
+                    navigate("/login")
+                }
+
+            }).catch(error => {
+                console.log(error)
+                toast.error(error.message)
+                navigate("/login")
+            })
 
     };
 
@@ -21,7 +46,33 @@ const Login = () => {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <h2 className="text-center text-4xl font-bold">Login</h2>
+
                     <div className="lg:ml-16 form-control border-0">
+                        <label className="label">
+                            <span className="label-text">Name</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Enter Your Name"
+                            className="input input-bordered input-primary w-full max-w-xs "
+                            // {...register("firstName", { required: true })}
+                            {...register("username", {
+                                required: {
+                                    value: true,
+                                    message: "Name is required"
+                                },
+
+                            })}
+                        />
+                        <label className="label">
+                            {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+
+
+                        </label>
+                    </div>
+
+
+                    {/* <div className="lg:ml-16 form-control border-0">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
@@ -47,7 +98,7 @@ const Login = () => {
                             {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
 
                         </label>
-                    </div>
+                    </div> */}
 
                     <div className="lg:ml-16 form-control  border-0">
                         <label className="label">

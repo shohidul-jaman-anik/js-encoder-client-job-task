@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './LoadApi.css'
 import { toast } from 'react-toastify';
+import './LoadApi.css';
 
 
 const LoadApi = () => {
@@ -14,11 +14,11 @@ const LoadApi = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                console.log( data)
+                console.log(data)
                 setData(data.data)
 
             })
-    }, [data])
+    }, [])
 
 
     const handleDelete = id => {
@@ -35,8 +35,8 @@ const LoadApi = () => {
                     console.log(result)
                     const remaining = data.filter(d => d._id !== id)
                     setData(remaining)
-                    if(result.status ==="Success"){
-                            toast.success("Successfully Delete")
+                    if (result.status === "Success") {
+                        toast.success("Successfully Delete")
                     }
                 })
         }
@@ -44,16 +44,32 @@ const LoadApi = () => {
 
     const handleEdit = id => {
         navigate(`/updateUser/${id}`)
-        console.log(id,"idd")
+        console.log(id, "idd")
     }
 
-
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        const url = `http://localhost:5000/profile`
+        fetch(url, {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                
+            }).catch(error => {
+                console.log(error)
+                navigate("/login")
+            })
+    }, [])
 
     return (
         <div>
 
-            <div class="overflow-x-auto">
-                <table class="table table-zebra w-full">
+            <div className="overflow-x-auto">
+                <table className="table table-zebra w-full">
                     <thead>
                         <tr>
                             <th></th>

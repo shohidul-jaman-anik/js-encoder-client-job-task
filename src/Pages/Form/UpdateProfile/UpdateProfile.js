@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
 const UpdateProfile = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+
+    const navigate=useNavigate()
 
     const onSubmit = async data => {
 
@@ -23,6 +26,23 @@ const UpdateProfile = () => {
             })
     }
 
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        const url = `http://localhost:5000/profile`
+        fetch(url, {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+
+            }).catch(error => {
+                console.log(error)
+                navigate("/login")
+            })
+    }, [])
 
     return (
         <div>

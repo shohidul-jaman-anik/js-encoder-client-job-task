@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Complete project proposal",
+    "description": "Write a detailed project proposal for client X",
+    "due_date": "2023-06-20",
+    "status": "pending"
+  },
+  {
+    "title": "Design website layout",
+    "description": "Create wireframes and design mockups for the website",
+    "due_date": "2023-06-15",
+    "status": "in progress"
+  },
+  {
+    "title": "Test website functionality",
+    "description": "Perform thorough testing of the website's features and functionalities",
+    "due_date": "2023-06-25",
+    "status": "pending"
+  },
+  {
+    "title": "Update user interface",
+    "description": "Improve the user interface based on user feedback",
+    "due_date": "2023-06-18",
+    "status": "in progress"
+  },
+  {
+    "title": "Prepare presentation",
+    "description": "Create a presentation for the project review meeting",
+    "due_date": "2023-06-30",
+    "status": "pending"
+  },
+  {
+    "title": "Fix bug in login functionality",
+    "description": "Investigate and resolve the bug in the login process",
+    "due_date": "2023-06-17",
+    "status": "in progress"
+  },
+  {
+    "title": "Optimize website performance",
+    "description": "Analyze and improve the performance of the website",
+    "due_date": "2023-06-22",
+    "status": "pending"
+  },
+  {
+    "title": "Update documentation",
+    "description": "Review and update the project documentation",
+    "due_date": "2023-06-19",
+    "status": "in progress"
+  },
+  {
+    "title": "Create user registration feature",
+    "description": "Implement user registration functionality for the website",
+    "due_date": "2023-06-23",
+    "status": "pending"
+  },
+  {
+    "title": "Write unit tests",
+    "description": "Develop and execute unit tests for critical components",
+    "due_date": "2023-06-16",
+    "status": "in progress"
+  }
+]

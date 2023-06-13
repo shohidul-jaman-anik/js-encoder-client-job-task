@@ -1,0 +1,14 @@
+.inputStyle {
+    border-color: 1px solid red;
+    margin: 1rem 0rem;
+    text-align: center;
+}
+
+.filterBtn {
+    margin-left: 1rem;
+    background-color: rgb(92, 88, 88);
+    color: white;
+    font-weight: 600;
+    padding: 7px 15px;
+    border-radius: 10px;
+}

@@ -8,6 +8,7 @@ import Login from './Pages/Form/Login/Login';
 import SignUP from './Pages/Form/SignUp/SignUP';
 import UpdateProfile from './Pages/Form/UpdateProfile/UpdateProfile';
 import Header from './Pages/Header/Header';
+import NotFound from './Pages/NotFound/NotFound';
 
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
 
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/SignUp' element={<SignUP></SignUP>}></Route>
+
+        <Route path='/*' element={<NotFound></NotFound>}></Route>
 
       </Routes>
       <ToastContainer />

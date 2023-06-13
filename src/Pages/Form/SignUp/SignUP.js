@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import SignUpImg from '../../../Asset/form-illustrator/Sign in-pana.svg';
 import './Signup.css';
 
@@ -8,13 +9,11 @@ import './Signup.css';
 const SignUP = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-
-
-
+    const navigate = useNavigate()
 
     const onSubmit = async data => {
 
-        fetch(``, {
+        fetch(`http://localhost:5000/register`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -22,7 +21,16 @@ const SignUP = () => {
             body: JSON.stringify(data)
         })
             .then(res => res.json())
-            .then(result => console.log("result", result))
+            .then(result => {
+                console.log("result", result)
+                toast.success("Account Successfully Created")
+                navigate("/login")
+
+            }).catch(error => {
+                console.log(error)
+                navigate("/SignUp")
+                toast.error(error.message)
+            })
     }
 
     return (
@@ -32,8 +40,8 @@ const SignUP = () => {
                 <img className='login-img ' src={SignUpImg} alt="" />
             </div>
             <form onSubmit={handleSubmit(onSubmit)} >
-                <h2 className="text-center font-bold">Sign Up</h2>
-                <div className="lg:ml-16 form-control border-0 ">
+                <h2 className="text-center text-4xl font-bold mb-8">Sign Up</h2>
+                <div className="lg:ml-16 form-control border-0">
                     <label className="label">
                         <span className="label-text">Name</span>
                     </label>
@@ -42,7 +50,7 @@ const SignUP = () => {
                         placeholder="Enter Your Name"
                         className="input input-bordered input-primary w-full max-w-xs "
                         // {...register("firstName", { required: true })}
-                        {...register("name", {
+                        {...register("username", {
                             required: {
                                 value: true,
                                 message: "Name is required"
@@ -57,7 +65,7 @@ const SignUP = () => {
                     </label>
                 </div>
 
-                <div className="lg:ml-16 form-control border-0 ">
+                {/* <div className="lg:ml-16 form-control border-0 ">
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
@@ -82,7 +90,7 @@ const SignUP = () => {
                         {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
 
                     </label>
-                </div>
+                </div> */}
 
                 <div className="lg:ml-16 form-control  border-0">
                     <label className="label">
@@ -121,7 +129,7 @@ const SignUP = () => {
                     </Link></small>
                 </p>
 
-             
+
             </form>
 
         </div>

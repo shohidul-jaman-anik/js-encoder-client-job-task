@@ -20,7 +20,7 @@ const Login = () => {
                     <img className='login-img ' src={loginImg} alt="" />
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    <h2 className="text-center">Login</h2>
+                    <h2 className="text-center text-4xl font-bold">Login</h2>
                     <div className="lg:ml-16 form-control border-0">
                         <label className="label">
                             <span className="label-text">Email</span>

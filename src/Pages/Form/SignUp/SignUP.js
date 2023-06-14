@@ -43,10 +43,10 @@ const SignUP = () => {
                 <h2 className="text-center text-4xl font-bold mb-8">Sign Up</h2>
                 <div className="lg:ml-16 form-control border-0">
                     <label className="label">
-                        <span className="label-text">Name</span>
+                        <span className="label-text">Email</span>
                     </label>
                     <input
-                        type="text"
+                        type="email"
                         placeholder="Enter Your Name"
                         className="input input-bordered input-primary w-full max-w-xs "
                         // {...register("firstName", { required: true })}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -6,11 +6,13 @@ import { toast } from 'react-toastify';
 
 const UpdateProfile = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const [data, setData] = useState()
 
     const navigate = useNavigate()
 
-    const onSubmit = async data => {
 
+
+    const onSubmit = async data => {
         fetch(`/${data.email}`, {
             method: "PUT",
             headers: {
@@ -24,6 +26,9 @@ const UpdateProfile = () => {
                 reset()
                 toast.success("Update Successfully done")
             })
+            reset()
+            toast.success("Update Successfully done")
+            navigate('/')
     }
 
     useEffect(() => {

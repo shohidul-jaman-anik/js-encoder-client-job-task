@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const UpdateProfile = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const onSubmit = async data => {
 
@@ -28,7 +28,7 @@ const UpdateProfile = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        const url = `http://localhost:5000/profile`
+        const url = `https://js-encoder-job-task.onrender.com/profile`
         fetch(url, {
             headers: {
                 Authorization: token

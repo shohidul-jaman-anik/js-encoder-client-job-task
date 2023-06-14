@@ -1,10 +1,8 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Notifications } from '../../../App';
-import { useState } from 'react';
 
 const UpdateUser = () => {
 
@@ -19,7 +17,7 @@ const UpdateUser = () => {
     const onSubmit = async data => {
         console.log('form data update', data)
 
-        fetch(`http://localhost:5000/taskManagement/${id}`, {
+        fetch(`https://js-encoder-job-task.onrender.com/taskManagement/${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

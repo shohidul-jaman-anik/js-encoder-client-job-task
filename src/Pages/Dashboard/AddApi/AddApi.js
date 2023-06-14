@@ -16,7 +16,7 @@ const AddApi = () => {
 
     const onSubmit = async data => {
         console.log('form data', data)
-        fetch('http://localhost:5000/taskManagement', {
+        fetch('https://js-encoder-job-task.onrender.com/taskManagement', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -43,7 +43,7 @@ const AddApi = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        const url = `http://localhost:5000/profile`
+        const url = `https://js-encoder-job-task.onrender.com/profile`
         fetch(url, {
             headers: {
                 Authorization: token

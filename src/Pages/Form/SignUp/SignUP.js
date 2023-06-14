@@ -13,7 +13,7 @@ const SignUP = () => {
 
     const onSubmit = async data => {
 
-        fetch(`http://localhost:5000/register`, {
+        fetch(`https://js-encoder-job-task.onrender.com/register`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

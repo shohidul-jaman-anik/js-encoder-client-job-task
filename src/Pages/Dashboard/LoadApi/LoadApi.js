@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import './LoadApi.css';
-import { useContext } from 'react';
 import { Notifications } from '../../../App';
+import './LoadApi.css';
 
 
 const LoadApi = () => {
@@ -24,15 +23,15 @@ const LoadApi = () => {
 
 
     const fetchData = () => {
-        const url = `http://localhost:5000/taskManagement?status=${statusFilter}&sort=${sortBy}&order=${sortOrder}`;
+        const url = `https://js-encoder-job-task.onrender.com/taskManagement?status=${statusFilter}&sort=${sortBy}&order=${sortOrder}`;
         fetch(url)
-          .then(res => res.json())
-          .then(data => {
-            console.log(data);
-            setData(data.data);
-          });
-      };
-      
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setData(data.data);
+            });
+    };
+
 
 
     const handleDelete = id => {
@@ -40,7 +39,7 @@ const LoadApi = () => {
         const proceed = window.confirm('Are you sure ?')
 
         if (proceed) {
-            const url = `http://localhost:5000/taskManagement/${id}`
+            const url = `https://js-encoder-job-task.onrender.com/taskManagement/${id}`
             fetch(url, {
                 method: "DELETE"
             })
@@ -69,7 +68,7 @@ const LoadApi = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        const url = `http://localhost:5000/profile`
+        const url = `https://js-encoder-job-task.onrender.com/profile`
         fetch(url, {
             headers: {
                 Authorization: token
@@ -88,13 +87,13 @@ const LoadApi = () => {
 
     const handleSort = field => {
         if (field === sortBy) {
-          setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
         } else {
-          setSortBy(field);
-          setSortOrder('asc');
+            setSortBy(field);
+            setSortOrder('asc');
         }
-      };
-      
+    };
+
 
 
 

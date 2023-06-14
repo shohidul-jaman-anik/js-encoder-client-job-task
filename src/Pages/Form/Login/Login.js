@@ -11,7 +11,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     const onSubmit = (data) => {
-        fetch(`http://localhost:5000/login`, {
+        fetch(`https://js-encoder-job-task.onrender.com/login`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -21,7 +21,7 @@ const Login = () => {
             .then(res => res.json())
             .then(result => {
                 if (result.success) {
-                    localStorage.setItem("token",result.token)
+                    localStorage.setItem("token", result.token)
                     console.log("result", result)
                     navigate("/")
                 } else {

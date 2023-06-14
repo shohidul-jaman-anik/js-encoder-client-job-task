@@ -1,7 +1,10 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Notifications } from '../../../App';
+import { useState } from 'react';
 
 const UpdateUser = () => {
 
@@ -9,11 +12,15 @@ const UpdateUser = () => {
     const { id } = useParams()
     console.log(id, "param id")
 
+    const [count, setCount] = useState(0);
+
+    const { notification, setNotification } = useContext(Notifications)
+
     const onSubmit = async data => {
         console.log('form data update', data)
 
         fetch(`http://localhost:5000/taskManagement/${id}`, {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "content-type": "application/json"
             },
@@ -24,14 +31,21 @@ const UpdateUser = () => {
                 console.log(data)
                 reset()
                 toast('Task Update Successfully')
+
+                setCount((prevCount) => prevCount + 1);
+                setNotification({
+                    title: `id: ${id}`,
+                    noti: count + 1,
+                    details: "Update A Task",
+                })
             })
     }
 
     return (
-        <div>
-            <p>Task Id : {id}</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='flex justify-center items-center'>
 
+            <form onSubmit={handleSubmit(onSubmit)} >
+                <p className='my-8 font-bold text-2xl'>Task Id : {id}</p>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Title</span>
@@ -51,7 +65,7 @@ const UpdateUser = () => {
                     <textarea
                         type="text"
                         placeholder="Description"
-                        className="input input-bordered w-full max-w-xs"
+                        className="input input-bordered w-full max-w-xs h-24"
                         {...register("description")}
                     />
                 </div>
@@ -67,10 +81,10 @@ const UpdateUser = () => {
                     />
                 </div>
 
-                
-                <div className="form-control w-full max-w-xs my-7">
 
-                    <label>Status:</label>
+                <div className="form-control w-full max-w-xs my-5">
+
+                    <label className='mb-2'>Status</label>
                     <select {...register('status')} className="input input-bordered w-full max-w-xs">
                         <option value="in progress">In Progress</option>
                         <option value="completed">Completed</option>

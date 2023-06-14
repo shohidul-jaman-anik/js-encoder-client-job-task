@@ -12,3 +12,10 @@
     padding: 7px 15px;
     border-radius: 10px;
 }
+
+.filter{
+    border: 2px solid rgb(70, 65, 65);
+    padding: 6px 30px;
+    margin: 5px;
+    border-radius: 5px;
+}

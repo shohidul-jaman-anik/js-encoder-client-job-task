@@ -1,3 +1,4 @@
+import { createContext, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,28 +12,39 @@ import Header from './Pages/Header/Header';
 import NotFound from './Pages/NotFound/NotFound';
 
 
+export const Notifications = createContext()
+
+
 function App() {
+
+  const [notification, setNotification] = useState({})
+  const value = { notification, setNotification }
+
+  console.log(notification,"NOtificationnnnnnn")
+
   return (
-    <div >
-      <Header></Header>
-      <Routes>
-        <Route path='/' element={
-          <LoadApi></LoadApi>
-        }></Route>
-        <Route path='/addApi' element={
-          <AddApi></AddApi>
-        }></Route>
-        <Route path='/updateUser/:id' element={<UpdateUser></UpdateUser>}></Route>
-        <Route path='/updateProfile' element={<UpdateProfile></UpdateProfile>}></Route>
+    <Notifications.Provider value={value}>
+      <div >
+        <Header></Header>
+        <Routes>
+          <Route path='/' element={
+            <LoadApi></LoadApi>
+          }></Route>
+          <Route path='/addApi' element={
+            <AddApi></AddApi>
+          }></Route>
+          <Route path='/updateUser/:id' element={<UpdateUser></UpdateUser>}></Route>
+          <Route path='/updateProfile' element={<UpdateProfile></UpdateProfile>}></Route>
 
-        <Route path='/login' element={<Login></Login>}></Route>
-        <Route path='/SignUp' element={<SignUP></SignUP>}></Route>
+          <Route path='/login' element={<Login></Login>}></Route>
+          <Route path='/SignUp' element={<SignUP></SignUP>}></Route>
 
-        <Route path='/*' element={<NotFound></NotFound>}></Route>
+          <Route path='/*' element={<NotFound></NotFound>}></Route>
 
-      </Routes>
-      <ToastContainer />
-    </div>
+        </Routes>
+        <ToastContainer />
+      </div>
+    </Notifications.Provider>
   );
 }
 

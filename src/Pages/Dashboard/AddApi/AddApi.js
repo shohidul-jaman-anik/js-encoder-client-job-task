@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Notifications } from '../../../App';
 import "./AddApi.css";
 
 const AddApi = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const navigate = useNavigate()
+
+
+    const { notification, setNotification } = useContext(Notifications)
+    const [count, setCount] = useState(0);
 
     const onSubmit = async data => {
         console.log('form data', data)
@@ -22,7 +27,15 @@ const AddApi = () => {
             .then(result => {
                 console.log(result, "result")
                 reset()
+
                 if (result) {
+                    setCount((prevCount) => prevCount + 1);
+
+                    setNotification({
+                        title: data.title,
+                        noti: count + 1,
+                        details: "Add A Task",
+                    })
                     toast('Task Add Sucessfully')
                 }
             })
@@ -47,11 +60,11 @@ const AddApi = () => {
     }, [])
 
     return (
-        <div className='taskContainer'>
+        <div className='taskContainer flex justify-center'>
 
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <h1>Add Task</h1>
+                <h1 className='text-4xl font-bold my-8'>Add Task</h1>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Title</span>
@@ -79,7 +92,7 @@ const AddApi = () => {
                     <textarea
                         type="text"
                         placeholder="Enter Description"
-                        className="input input-bordered w-full max-w-xs"
+                        className="input input-bordered w-full max-w-xs h-24"
                         {...register("description", {
                             required: {
                                 value: true,
@@ -105,7 +118,7 @@ const AddApi = () => {
 
                 <div className="form-control w-full max-w-xs my-7">
 
-                    <label>Status:</label>
+                    <label className='mb-2'>Status</label>
                     <select {...register('status')} className="input input-bordered w-full max-w-xs">
                         <option value="in progress">In Progress</option>
                         <option value="completed">Completed</option>
@@ -115,9 +128,9 @@ const AddApi = () => {
                 </div>
 
 
-
-
                 <input className='btn w-full max-w-xs mt-4 text-white' type="submit" value="Add Task" />
+
+
             </form>
         </div>
     );

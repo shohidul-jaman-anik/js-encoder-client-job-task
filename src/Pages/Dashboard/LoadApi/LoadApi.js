@@ -7,7 +7,7 @@ import './LoadApi.css';
 
 const LoadApi = () => {
     const [data, setData] = useState([])
-
+    const [sortingData, setSortingData] = useState("ASC")
     const [sortBy, setSortBy] = useState('title');
     const [sortOrder, setSortOrder] = useState('asc');
     const [statusFilter, setStatusFilter] = useState('');
@@ -85,21 +85,27 @@ const LoadApi = () => {
     }, [])
 
 
-    const handleSort = field => {
-        if (field === sortBy) {
-            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-        } else {
-            setSortBy(field);
-            setSortOrder('asc');
-        }
-    };
-
-
-
 
     const handleFilter = () => {
         fetchData();
     };
+
+    const sorting = (data1) => {
+        if (sortingData === "ASC") {
+            const sort = [...data].sort((a, b) =>
+                a[data1].toLocaleLowerCase() > b[data1].toLocaleLowerCase() ? 1 : -1
+            )
+            setData(sort)
+            setSortingData("DSC")
+        }
+        if (sortingData === "DSC") {
+            const sort = [...data].sort((a, b) =>
+                a[data1].toLocaleLowerCase() < b[data1].toLocaleLowerCase() ? 1 : -1
+            )
+            setData(sort)
+            setSortingData("DSC")
+        }
+    }
 
     return (
         <div>
@@ -124,8 +130,8 @@ const LoadApi = () => {
                             <th></th>
                             <th >title</th>
                             <th>Description</th>
-                            <th onClick={() => handleSort('due_date')}>
-                                Due Date {sortBy === 'due_date' && <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>}
+                            <th onClick={() => sorting('due_date')}>
+                                Due Date <span className='text-red-500'>( sort )</span>
                             </th>
                             <th>Status</th>
                             <th>Update</th>
